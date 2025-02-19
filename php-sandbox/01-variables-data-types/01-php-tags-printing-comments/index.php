@@ -1,6 +1,11 @@
 <?php
 echo "hello from php";
-?>
+echo '<br />';
+print "hello from print";
+// differences between them:
+echo '<br />';
+echo 'value one', 'value two'; // print can't do this.
+// if there is no HTML under it, the closing statement is not needed -> ?> 
 
 <!DOCTYPE html>
 <html lang="en">
