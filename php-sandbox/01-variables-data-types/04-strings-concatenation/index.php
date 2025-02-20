@@ -1,3 +1,12 @@
+<?php
+
+$firstName = "Xing";
+$secondName = "Xuan Fah Lih";
+
+// $fullName = $firstName + $secondName; // This would not work, despite the intellisense saying nothing about it.
+$fullName = $firstName . ' ' . $secondName;
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -17,7 +26,11 @@
   <div class="container mx-auto p-4 mt-4">
     <div class="bg-white rounded-lg shadow-md p-6">
       <!-- Output -->
-
+      <?= 'My full name is: ' . $fullName ?>
+      <br />
+      <?= "My full name is: $fullName" // Double quotes allow us to do this. ?>
+      <br />
+      <?= "Backslashes to get literal values \$fullName" ?>
     </div>
   </div>
 </body>
