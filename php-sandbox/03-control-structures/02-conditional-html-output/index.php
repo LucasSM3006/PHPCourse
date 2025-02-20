@@ -1,7 +1,7 @@
 <?php
 
 $isLoggedIn = true;
-$name = "greg";
+$name = "john";
 
 ?>
 
@@ -28,8 +28,16 @@ $name = "greg";
         <?php if (isset($name)) : ?>
           <h1 class="text-3xl">Welcome <?= $name ?></h1>
         <?php else : ?>
-          <h1 class="text-3xl">Welcome</h1>
+          <h1 class="text-3xl">Welcome to the app</h1>
         <?php endif; ?>
+      <?php else : ?>
+        <h1 class="text-3xl">Please log in</h1>
+      <?php endif; ?>
+
+      <?php if($isLoggedIn && isset($name)) : ?>
+        <h1 class="text-3xl">Welcome <?= $name ?></h1>
+      <?php elseif($isLoggedIn) : ?>
+        <h1 class="text-3xl">Welcome to the app</h1>
       <?php else : ?>
         <h1 class="text-3xl">Please log in</h1>
       <?php endif; ?>
