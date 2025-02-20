@@ -1,7 +1,7 @@
 <?php
 
 $title = "Introduction to PHP";
-$author = "By: John Doe";
+$authorName = "John Doe";
 $body = "PHP (Hypertext Preprocessor) is a widely used server-side scripting
         language that has revolutionized web development. With its simplicity,
         flexibility, and vast community support, PHP has become the backbone of
@@ -20,7 +20,7 @@ $pageTitle = "Brad's PHP Blog | $title";
   <body>
     <main>
       <h1><?= $title ?></h1>
-      <p><?= $author ?></p>
+      <p><?= "By: " . $authorName ?></p>
       <p>
         <?= $body ?>
       </p>
