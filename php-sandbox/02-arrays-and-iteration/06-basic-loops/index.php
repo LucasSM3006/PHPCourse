@@ -1,3 +1,27 @@
+<?php
+
+for($i = 0; $i < 10; $i++)
+{
+    echo $i;
+}
+
+$count = 0;
+
+do
+{
+    echo $count;
+    $count++;
+} while($count < 10);
+
+$count = 0;
+
+while($count < 10)
+{
+    echo $count . "<br />";
+    $count++;
+};
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -16,7 +40,19 @@
     </header>
     <div class="container mx-auto p-4 mt-4">
         <div class="bg-white rounded-lg shadow-md p-6 mt-6">
-            <!-- Output -->
+            <ul>
+                <?php for($i = 0; $i < 10; $i++): ?>
+                    <li>NumberForLoop: <?= $i ?></li>
+                <?php endfor; ?>
+                    <br />
+                <?php $i = 0; while ($i < 10): ?>
+                    <li>NumberWhileLoop: <?= $i ?></li>
+                <?php $i++; endwhile; ?>
+                    <br />
+                <?php $i = 0; do {?>
+                    <li>NumberDoLoop: <?= $i ?></li>
+                <?php $i++; } while($i < 10); ?>
+            </ul>
         </div>
     </div>
 </body>
