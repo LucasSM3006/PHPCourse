@@ -41,31 +41,6 @@ $listings = [
     'tags' => ['Customer Support', 'Communication', 'Problem Solving']
   ],
 ];
-
-function printListings($listings) {
-  foreach($listings as $listing)
-  {
-    echo "<div class=\"md my-4\">
-        <div class=\"bg-white rounded-lg shadow-md\">
-          <div class=\"p-4\">
-            <h2 class=\"text-xl font-semibold\">" . $listing['title'] . "</h2>
-            <p class=\"text-gray-700 text-lg mt-2\">" . $listing['description'] . "</p>
-            <ul class=\"mt-4\">
-              <li class=\"mb-2\">
-                <strong>Salary:</strong> $" . number_format($listing['salary'], 2, '.', ',') . "
-              </li>
-              <li class=\"mb-2\">
-                <strong>Location:</strong> " . $listing['location'] . "
-              </li>
-              <li class=\"mb-2\">
-                <strong>Tags:</strong> " . implode(", ", $listing['tags']) . "
-              </li>
-            </ul>
-          </div>
-        </div>
-      </div>";
-  }
-};
 ?>
 
 
@@ -86,7 +61,28 @@ function printListings($listings) {
     </div>
   </header>
   <div class="container mx-auto p-4 mt-4">
-<?= printListings($listings) ?>
+    <!-- Output -->
+    <?php foreach($listings as $listing) : ?>
+    <div class="md my-4">
+      <div class="bg-white rounded-lg shadow-md">
+        <div class="p-4">
+          <h2 class="text-xl font-semibold"><?= $listing['title'] ?></h2>
+          <p class="text-gray-700 text-lg mt-2"><?= $listing['description'] ?></p>
+          <ul class="mt-4">
+            <li class="mb-2">
+              <strong>Salary:</strong> <?= '$' . number_format($listing['salary'], 2, '.', ',') ?>
+            </li>
+            <li class="mb-2">
+              <strong>Location:</strong> <?= $listing['location'] ?>
+            </li>
+            <li class="mb-2">
+              <strong>Tags:</strong> <?= implode(",", $listing['tags']) ?>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <?php endforeach; ?>
   </div>
 </body>
 
