@@ -1,5 +1,26 @@
 <?php
 $output = null;
+
+// Key value pairs. Dictionaries in .NET/Java.
+
+$user = [
+    'name' => 'juan',
+    'email' => 'juandolle@gmail.com',
+    'password' => 'juanzito221',
+    'hobbies' => ['Video Games', 'Music', 'Modelling']
+];
+
+// var_dump($user);
+
+// accessing elements.
+$output = $user['name'];
+// $output = $user[2]; // Raises an error, key not defined.
+// $output = $user['hobbies']; // Array to string conversion.
+$output = $user['hobbies'][0]; // Grabs first value.
+
+$user['address'] = '222 main street';
+unset($user['address']);
+
 ?>
 
 <!DOCTYPE html>
@@ -22,6 +43,12 @@ $output = null;
         <div class="bg-white rounded-lg shadow-md p-6 mt-6">
             <!-- Output -->
             <p class="text-xl"><?= $output ?></p>
+            <h2 class="text-xl font-semibold my-4">User Array:</h2>
+            <p>
+                <pre>
+                    <?php print_r($user); ?>
+                </pre>
+            </p>
         </div>
     </div>
 </body>
