@@ -43,7 +43,7 @@ $sum = 0;
 
 for($i = 0; $i < count($numbers); $i++)
 {
-  $sum += $i;
+  $sum += $numbers[$i];
 }
 
 echo "Sum of numbers in array: " . $sum;
