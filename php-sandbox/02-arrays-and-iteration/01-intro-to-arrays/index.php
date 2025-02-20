@@ -22,4 +22,17 @@ inspect($numbers);
 
 print_r($numbers); // shows all values formatted.
 
+echo "<br />";
+
 // echo $names; // this causes a warning, "array to string conversion".
+
+// Adding elements to arrays. They're dynamically sized.
+
+$numbers[17] = 123213; // Last position atm.
+$numbers[] = 111; // Adds to the last position if empty.
+
+unset($numbers[3]); // Not only removes the value, but also the index. Weird behaviour.
+
+$numbers = array_values($numbers); // Rearranges the array, fixes the lacking indexes.
+
+inspect($numbers);
