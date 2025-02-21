@@ -38,9 +38,12 @@ $listings = [
     'description' => 'We are looking for a friendly customer service representative to assist customers and resolve issues.',
     'salary' => 40000,
     'location' => 'New York',
-    'tags' => ['Customer Support', 'Communication', 'Problem Solving']
+    'tags' => []
   ],
 ];
+
+// Let's say this gets your location.
+$location = "New York";
 ?>
 
 
@@ -80,10 +83,15 @@ $listings = [
               </li>
               <li class="mb-2">
                 <strong>Location:</strong> <?= $job['location'] ?>
+                <?php if($job['location'] == $location) : ?>
+                  <span class="text-xs text-white bg-blue-500 rounded-full px-2 py-1 ml-2">Local</span>
+                <?php endif; ?>
               </li>
-              <li class="mb-2">
-                <strong>Tags:</strong> <?= implode(', ', $job['tags']) ?>
-              </li>
+                <?php if(!empty($job['tags'])) : ?>
+                <li class="mb-2">
+                  <strong>Tags:</strong> <?= implode(', ', $job['tags']) ?>
+                </li>
+                <?php endif; ?>
             </ul>
           </div>
         </div>
