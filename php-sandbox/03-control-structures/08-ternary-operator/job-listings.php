@@ -63,12 +63,7 @@ $listings = [
   <div class="container mx-auto p-4 mt-4">
     <?php foreach ($listings as $index => $job) : ?>
       <div class="md my-4">
-        <div class="rounded-lg shadow-md 
-            <?php if ($index % 2 === 0) : ?>
-              bg-blue-100
-            <?php else : ?>
-              bg-white
-            <?php endif; ?>">
+        <div class="rounded-lg shadow-md <?= $index % 2 == 0 ? 'bg-blue-100' : 'bg-white'?>">
           <div class="p-4">
             <h2 class="text-xl font-semibold"><?= $job['title'] ?></h2>
             <p class="text-gray-700 text-lg mt-2"><?= $job['description'] ?></p>
@@ -78,15 +73,11 @@ $listings = [
               </li>
               <li class="mb-2">
                 <strong>Location:</strong> <?= $job['location'] ?>
-                <?php if ($job['location'] === 'New York') : ?>
-                  <span class="text-xs text-white bg-blue-500 rounded-full px-2 py-1 ml-2">Local</span>
-                <?php endif; ?>
+                <?= $job['location'] == 'New York' ? '<span class="text-xs text-white bg-blue-500 rounded-full px-2 py-1 ml-2">Local</span>' : '' ?>
               </li>
-              <?php if (!empty($job['tags'])) : ?>
-                <li class="mb-2">
-                  <strong>Tags:</strong> <?= implode(', ', $job['tags']) ?>
-                </li>
-              <?php endif; ?>
+              <?= !empty($job['tags']) ? '<li class="mb-2">
+                  <strong>Tags:</strong>' . implode(', ', $job['tags']) .
+                '</li>' : '' ?>
             </ul>
           </div>
         </div>
