@@ -64,7 +64,11 @@ $listings = [
     <!-- Output -->
     <?php foreach ($listings as $job) : ?>
       <div class="md my-4">
+      <?php if ($job['id'] % 2 == 0) : ?> 
+        <div class="bg-blue-100 rounded-lg shadow-md">
+      <?php else : ?>
         <div class="bg-white rounded-lg shadow-md">
+      <?php endif; ?>
           <div class="p-4">
             <h2 class="text-xl font-semibold"><?= $job['title'] ?></h2>
             <p class="text-gray-700 text-lg mt-2"><?= $job['description'] ?></p>
