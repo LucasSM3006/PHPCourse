@@ -10,3 +10,14 @@ Names Challenge:
 */
 
 $names = ['Alex', 'Beth', 'Caroline', 'Dave', 'Elanor', 'Anna', 'Freddie', 'Adam'];
+$reversedNames;
+
+foreach($names as $name)
+{
+    if($name[0] == 'A') continue;
+    $reversedNames[] = strrev(strtolower($name));
+}
+
+echo '<pre>';
+var_dump($reversedNames);
+echo '</pre>';
