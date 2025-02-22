@@ -19,7 +19,7 @@ if (!empty($_GET['q'])) {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Laragon</title>
+    <title>Xampp</title>
     <link href="https://fonts.googleapis.com/css?family=Karla:400" rel="stylesheet" type="text/css">
     <style>
         html, body {
@@ -89,7 +89,7 @@ if (!empty($_GET['q'])) {
 <body>
     <div class="container">
         <div class="content">
-            <h1 class="title" title="Laragon">Laragon</h1>
+            <h1 class="title" title="Xampp">Xampp</h1>
             <div class="info">
                 <p><?php echo htmlspecialchars($_SERVER['SERVER_SOFTWARE'], ENT_QUOTES, 'UTF-8'); ?></p>
                 <p>PHP version: <?php echo htmlspecialchars(phpversion(), ENT_QUOTES, 'UTF-8'); ?>  
@@ -98,7 +98,7 @@ if (!empty($_GET['q'])) {
                 <p>Document Root: <?php echo htmlspecialchars($_SERVER['DOCUMENT_ROOT'], ENT_QUOTES, 'UTF-8'); ?></p>
             </div>
             <div class="opt">
-                <p><a title="Getting Started" href="https://laragon.org/docs">Getting Started</a></p>
+                <p><a title="Getting Started" href="https://www.apachefriends.org/docs/">Getting Started</a></p>
             </div>
         </div>
     </div>
