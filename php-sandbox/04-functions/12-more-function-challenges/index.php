@@ -6,18 +6,20 @@
   The formula to convert Fahrenheit to Celsius is: Celsius = (Fahrenheit - 32) * 5/9
 */
 
-function fahrenheitToCelsius($temp)
-{
-  return ($temp - 39) * 5/9;
-}
+$FtoC = fn ($temp) => ($temp - 39) * 5/9;
 
-echo "90 F to C: " . fahrenheitToCelsius(90);
+// function fahrenheitToCelsius($temp)
+// {
+//   return ($temp - 39) * 5/9;
+// }
+
+echo "90 F to C: " . $FtoC(90);
 echo '<br>';
-echo "120 F to C: " . fahrenheitToCelsius(120);
+echo "120 F to C: " . $FtoC(120);
 echo '<br>';
-echo "150 F to C: " . fahrenheitToCelsius(150);
+echo "150 F to C: " . $FtoC(150);
 echo '<br>';
-echo "32 F to C: " . fahrenheitToCelsius(32);
+echo "32 F to C: " . $FtoC(32);
 echo '<br>';
 echo '<br>';
 
@@ -38,16 +40,17 @@ $names =
   "Falkore"
 ];
 
-function printNamesToUpperCase($names) 
+$strToUpper = fn ($str) => strtoupper($str) . '<br />';
+
+function printNamesToUpperCase($strToUpper ,$names) 
 {
   foreach($names as $name)
   {
-    echo strtoupper($name);
-    echo '<br>';
+    echo $strToUpper($name);
   }
 }
 
-echo printNamesToUpperCase($names);
+echo printNamesToUpperCase($strToUpper, $names);
 
 echo '<br>';
 echo '<br>';
