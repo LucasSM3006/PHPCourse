@@ -18,7 +18,7 @@ class User
     }
 }
 
-$user = new User(null, null);
+$user = new User("name", "name@email.com");
 
 $user->name = "john";
 $user->email = "john@email.com";
