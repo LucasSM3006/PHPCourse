@@ -62,6 +62,17 @@ function getAverageSalary($jobListings)
   }
   return formatSalary($sum / count($jobListings));
 }
+
+function getAverageSalaryALT($jobListings)
+{
+  $salaries = array_column($jobListings, $jobListings['salary']);
+  $sum = array_sum($salaries);
+  $count = count($jobListings);
+
+  $averageSalary = ($count > 0) ? $sum / $count : 0;
+
+  return formatSalary($averageSalary);
+}
 ?>
 
 
