@@ -13,6 +13,17 @@ $FtoC = fn ($temp) => ($temp - 39) * 5/9;
 //   return ($temp - 39) * 5/9;
 // }
 
+// Harder version
+
+$baseTemp = 32;
+
+$fahToCel = function ($f) use ($baseTemp)
+{
+  return ($f - $baseTemp) * 5 / 9;
+};
+
+//
+
 echo "90 F to C: " . $FtoC(90);
 echo '<br>';
 echo "120 F to C: " . $FtoC(120);
