@@ -1,22 +1,22 @@
 <?php
 // Common server variables:
-$requestMethod = '';
-$serverProtocol = '';
-$serverName = '';
-$serverPort = '';
-$serverSoftware = '';
-$serverAdmin = '';
-$documentRoot = '';
-$scriptFilename = '';
-$scriptName = '';
-$phpSelf = '';
-$remoteAddr = '';
-$connection = '';
-$host = '';
-$referer = '';
-$userAgent = '';
-$queryString = '';
-$requestUri = '';
+$requestMethod = $_SERVER['REQUEST_METHOD'] ?? '';
+$serverProtocol = $_SERVER['SERVER_PROTOCOL'] ?? '';
+$serverName = $_SERVER['SERVER_NAME'] ?? '';
+$serverPort = $_SERVER['SERVER_PORT'] ?? '';
+$serverSoftware = $_SERVER['SERVER_SOFTWARE'] ?? '';
+$serverAdmin = $_SERVER['SERVER_ADMIN'] ?? 'NO ONE.';
+$documentRoot = $_SERVER['DOCUMENT_ROOT'] ?? '';
+$scriptFilename = $_SERVER['SCRIPT_FILENAME'] ?? '';
+$scriptName = $_SERVER['SCRIPT_NAME'] ?? '';
+$phpSelf = $_SERVER['PHP_SELF'] ?? '';
+$remoteAddr = $_SERVER['REMOTE_ADDR'] ?? '';
+$connection = $_SERVER['HTTP_CONNECTION'] ?? '';
+$host = $_SERVER['HTTP_HOST'] ?? '';
+$referer = $_SERVER['HTTP_REFERER'] ?? 'EMPTY!'; // Basically if someone taps on something to be taken to a page, this will be that.
+$userAgent = $_SERVER['HTTP_USER_AGENT'] ?? '';
+$queryString = $_SERVER['QUERY_STRING'] ?? ''; // The query string at the top. simulate by doing "localhost:8000?name=example"
+$requestUri = $_SERVER['REQUEST_URI'] ?? ''; // Includes query string if any!  
 
 ?>
 
@@ -31,6 +31,11 @@ $requestUri = '';
 </head>
 
 <body class="bg-gray-100">
+  <div class="bg-gray-200 p-4 rounded-lg">
+    <form method="POST">
+      <input type="submit" value="Submit (Will change 'Request Method' from GET to POST)">
+    </form>
+  </div>
   <div class="container mx-auto p-8 bg-white shadow-md mt-10 rounded-lg">
     <h1 class="text-3xl font-semibold mb-4 text-center">Server Information</h1>
     <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
