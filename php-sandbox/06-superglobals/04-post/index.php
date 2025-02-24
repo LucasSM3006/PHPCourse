@@ -12,7 +12,7 @@
   <div class="flex justify-center items-center h-screen">
     <div class="bg-white p-8 rounded shadow-md w-full max-w-md">
       <h1 class="text-2xl font-semibold mb-6">Create Job Listing</h1>
-       <form method="post" action="process.php"> <!-- action is going to submit that data to a certain file. if we leave it empty, it defaults to index.php-->
+       <form method="post"> <!-- action="process.php" action is going to submit that data to a certain file. if we leave it empty, it defaults to index.php-->
         <div class="mb-4">
           <label for="title" class="block text-gray-700 font-medium">Title</label>
           <input type="text" id="title" name="title" placeholder="Enter job title" class="w-full px-4 py-2 border rounded focus:ring focus:ring-blue-300 focus:outline-none">
