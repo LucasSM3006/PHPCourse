@@ -93,6 +93,16 @@ function calculateAverageSalary($listings)
     </div>
     <!-- Output -->
     <?php foreach ($listings as $index => $job) : ?>
+      <?php
+        if(isset($_GET['location']))
+        {
+          if(!($_GET['location'] == $job['location']))
+          {
+            continue;
+          }
+        }
+        
+        ?>
       <div class="md my-4">
         <div class="rounded-lg shadow-md <?= $index % 2 === 0 ? 'bg-blue-100' : 'bg-white'; ?>">
           <div class="p-4">
