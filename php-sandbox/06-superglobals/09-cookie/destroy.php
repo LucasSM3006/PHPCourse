@@ -1,3 +1,9 @@
+<?php
+
+setcookie('username', '', time() - 3600, '/'); // Sets the value to nothing, makes the expiration date an hour ago.
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 

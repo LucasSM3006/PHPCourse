@@ -1,3 +1,9 @@
+<?php
+
+setcookie('username', 'useruser221', time() + 3600, '/'); // Sets a cookie with a name of username, value of useruser221, expiration of one hour, and root as the location.
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
