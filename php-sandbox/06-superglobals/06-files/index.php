@@ -28,19 +28,31 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['submit'])) {
     // create file name
     $fileName = uniqid() . "-" . $file['name']; // generates a unique id. useful for things like "avatar.jpg" and such.
 
-    echo "File successfully uploaded". "<br>";
-    echo $fileName;
-    echo "<br>";
+    // check file type
+    $allowedExtensions = ["jpeg", "jpg", "png", "mp3"];
+    $fileExtension = strtolower(pathinfo($fileName, PATHINFO_EXTENSION)); // There's more than just pathinfo_extension btw!
 
-    // upload the file.
-
-    if(move_uploaded_file($file['tmp_name'], $uploadDir . $fileName)) // the slash is already added. would be $uploadDir . "/" . $filename otherwise.
+    // checks if extension is in array.
+    if(in_array($fileExtension, $allowedExtensions))
     {
-      echo 'file uploaded.';
+      echo "File successfully uploaded". "<br>";
+      echo $fileName;
+      echo "<br>";
+
+      // upload the file.
+
+      if(move_uploaded_file($file['tmp_name'], $uploadDir . $fileName)) // the slash is already added. would be $uploadDir . "/" . $filename otherwise.
+      {
+        echo 'file uploaded.';
+      }
+      else 
+      {
+        echo 'file upload error: ' . $file['error'];
+      }
     }
-    else 
+    else
     {
-      echo 'file upload error: ' . $file['error'];
+      echo "invalid file type";
     }
   }
 
