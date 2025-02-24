@@ -42,6 +42,9 @@ $listings = [
   ],
 ];
 
+// array holding valid locations. would likely be dynamic but it is more of an example anyhow.
+$validLocations = ['Chicago', 'New York', 'Seattle', 'Boston', 'San Francisco'];
+
 function formatSalary($salary)
 {
   return '$' . number_format($salary, 2);
@@ -69,7 +72,8 @@ function calculateAverageSalary($listings)
   return formatSalary($averageSalary);
 }
 
-if(isset($_GET['location']))
+// checking if the query value is in the array. should help with some safety.
+if(isset($_GET['location']) && in_array($_GET['location'], $validLocations))
 {
   $location = $_GET['location'];
 
