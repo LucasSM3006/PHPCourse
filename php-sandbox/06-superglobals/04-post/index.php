@@ -1,3 +1,21 @@
+<?php
+// echo $_SERVER['REQUEST_METHOD'];
+
+$title = '';
+$description = '';
+$isSubmitted = false;
+
+if($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['submit'])) // we can get the data out of input fields through the names of the fields. Submit is a field at the bottom.
+{
+  $title = htmlspecialchars($_POST['title']) ?? "";
+  $description = htmlspecialchars($_POST['description']) ?? "";
+
+  // echo "Title: {$title}, Description: {$description}";
+  $isSubmitted = true;
+} 
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -30,6 +48,19 @@
       </form>
 
       <!-- Display submitted data -->
+       <?php if($isSubmitted) : ?>
+        <div class="mt-6 p-4 border rounded bg-gray-200">
+          <h2 class="text-lg font-semibold">Submitted Listing:</h2>
+          <p>
+            <strong>Title:</strong>
+            <?= $title ?>
+          </p>
+          <p>
+          <strong>Description:</strong>
+            <?= $description ?>
+          </p>
+        </div>
+        <?php endif; ?>
     </div>
   </div>
 </body>
