@@ -7,6 +7,43 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['submit'])) {
   $title = htmlspecialchars($_POST['title'] ?? '');
   $description = htmlspecialchars($_POST['description'] ?? '');
 
+  // echo '<pre>';
+  // var_dump($_FILES);
+  // echo ($_FILES['logo']['name']);
+  // echo '</pre>';
+
+  $file = $_FILES['logo'];
+
+  if($file['error'] === UPLOAD_ERR_OK) // means theres no error.
+  {
+    // specify where to upload
+    $uploadDir = 'uploads/';
+
+    // check and create directory
+    if(!is_dir($uploadDir))
+    {
+      mkdir($uploadDir, 0755, true);
+    }
+
+    // create file name
+    $fileName = uniqid() . "-" . $file['name']; // generates a unique id. useful for things like "avatar.jpg" and such.
+
+    echo "File successfully uploaded". "<br>";
+    echo $fileName;
+    echo "<br>";
+
+    // upload the file.
+
+    if(move_uploaded_file($file['tmp_name'], $uploadDir . $fileName)) // the slash is already added. would be $uploadDir . "/" . $filename otherwise.
+    {
+      echo 'file uploaded.';
+    }
+    else 
+    {
+      echo 'file upload error: ' . $file['error'];
+    }
+  }
+
   $submitted = true;
 }
 ?>
