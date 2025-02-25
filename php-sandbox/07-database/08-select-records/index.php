@@ -1,3 +1,17 @@
+<?php
+
+require 'database.php';
+
+// if database.php is somewhere else, you need to type out the location.
+// require '../../database.php;
+
+$statement = $pdo->prepare("SELECT * FROM posts");
+
+
+
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
