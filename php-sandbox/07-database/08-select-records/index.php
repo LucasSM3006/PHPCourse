@@ -7,8 +7,17 @@ require 'database.php';
 
 $statement = $pdo->prepare("SELECT * FROM posts");
 
+// running it.
 
+$statement->execute();
 
+// get results.
+
+$results = $statement->fetchAll();
+
+echo "<pre>";
+var_dump($results);
+echo "</pre>";
 
 ?>
 
