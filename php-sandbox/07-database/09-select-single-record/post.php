@@ -1,3 +1,16 @@
+<?php
+require_once 'database.php';
+
+// Prepare a SELECT statement
+$stmt = $pdo->prepare('SELECT * FROM posts where id =' . $_GET['id']);
+
+// Execute the statement
+$stmt->execute();
+
+// Fetch the results
+$post = $stmt->fetch();
+
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -15,15 +28,17 @@
     </div>
   </header>
   <div class="container mx-auto p-4 mt-4">
+
     <div class="md my-4">
       <div class="rounded-lg shadow-md">
         <div class="p-4">
-          <h2 class="text-xl font-semibold">Post One</h2>
-          <p class="text-gray-700 text-lg mt-2 mb-5">This is post one</p>
+          <h2 class="text-xl font-semibold"><?= $post['title'] ?></h2>
+          <p class="text-gray-700 text-lg mt-2 mb-5"><?= $post['body'] ?></p>
           <a href="index.php">Go Back</a>
         </div>
       </div>
     </div>
+
   </div>
 </body>
 
