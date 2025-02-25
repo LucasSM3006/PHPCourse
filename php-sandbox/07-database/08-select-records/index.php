@@ -15,6 +15,10 @@ $statement->execute();
 
 $results = $statement->fetchAll();
 
+// $results = $statement->fetchAll(PDO::FETCH_ASSOC); // This code will just get an associative array.
+// We get indexes in the fetchAll(), but by giving it PDO::FETCH_ASSOC as a parameter, we just get the arrays without the indexes.
+// It's also possible to set attributes (CHECK /database.php) to see that. Commented below the attribute set.
+
 echo "<pre>";
 var_dump($results);
 echo "</pre>";
