@@ -1,31 +1,37 @@
 <?php
 require_once 'database.php';
 
-$displayPost = false;
+$id = $_GET['id'] ?? null;
 
-if(isset($_GET['id']))
+if(!$id)
 {
-  // Prepare a SELECT statement
-  $stmt = $pdo->prepare('SELECT * FROM posts where id =' . $_GET['id']);
-  
-  // Execute the statement
-  $stmt->execute();
-  
-  // Fetch the results
-  $post = $stmt->fetch();
-
-  $displayPost = true;
-
-  if($post === false)
-  {
-    $displayPost = false;
-  }
-  else
-  {
-    $displayPost = true;
-  }
+  header('Location: index.php');
+  exit;
 }
 
+$displayPost = false;
+
+
+$sql = ('SELECT * FROM posts where id = :id');
+
+$stmt = $pdo->prepare($sql);
+
+$params = ['id' => $id]; // Basically tells it to replace ':id' with the value of $id.
+
+$stmt->execute($params);
+
+$post = $stmt->fetch();
+
+$displayPost = true;
+
+if($post === false)
+{
+  $displayPost = false;
+}
+else
+{
+  $displayPost = true;
+}
 
 ?>
 <!DOCTYPE html>
