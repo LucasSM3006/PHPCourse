@@ -1,14 +1,31 @@
 <?php
 require_once 'database.php';
 
-// Prepare a SELECT statement
-$stmt = $pdo->prepare('SELECT * FROM posts where id =' . $_GET['id']);
+$displayPost = false;
 
-// Execute the statement
-$stmt->execute();
+if(isset($_GET['id']))
+{
+  // Prepare a SELECT statement
+  $stmt = $pdo->prepare('SELECT * FROM posts where id =' . $_GET['id']);
+  
+  // Execute the statement
+  $stmt->execute();
+  
+  // Fetch the results
+  $post = $stmt->fetch();
 
-// Fetch the results
-$post = $stmt->fetch();
+  $displayPost = true;
+
+  if($post === false)
+  {
+    $displayPost = false;
+  }
+  else
+  {
+    $displayPost = true;
+  }
+}
+
 
 ?>
 <!DOCTYPE html>
@@ -32,8 +49,12 @@ $post = $stmt->fetch();
     <div class="md my-4">
       <div class="rounded-lg shadow-md">
         <div class="p-4">
-          <h2 class="text-xl font-semibold"><?= $post['title'] ?></h2>
-          <p class="text-gray-700 text-lg mt-2 mb-5"><?= $post['body'] ?></p>
+          <?php if($displayPost) : ?>
+            <h2 class="text-xl font-semibold"><?= $post['title'] ?></h2>
+            <p class="text-gray-700 text-lg mt-2 mb-5"><?= $post['body'] ?></p>
+            <?php else: ?>
+            <h2 class="text-xl font-semibold">Post not found.</h2>
+          <?php endif; ?>
           <a href="index.php">Go Back</a>
         </div>
       </div>
