@@ -1,9 +1,9 @@
 <?php 
 
-require_once basePath('views/partials/head.php');
-require_once basePath('views/partials/navbar.php');
-require_once basePath('views/partials/showcase-search.php');
-require_once basePath('views/partials/topbanner.php');
+loadPartial('head');
+loadPartial('navbar');
+loadPartial('showcase-search');
+loadPartial('topbanner');
 
 ?>
 
@@ -199,7 +199,7 @@ require_once basePath('views/partials/topbanner.php');
       </section>
 <?php
 
-require_once basePath('views/partials/bottombanner.php');
-require_once basePath('views/partials/footer.php');
+loadPartial('bottombanner');
+loadPartial('footer');
 
 ?>

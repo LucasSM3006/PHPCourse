@@ -2,5 +2,5 @@
 
 require '../helpers.php';
 
-require basePath('views/home.view.php');
+loadView('home');
 // require './views/home.view.php'; // also works fine
