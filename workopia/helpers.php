@@ -25,7 +25,16 @@ function basePath($path = '')
 
 function loadView($name)
 {
-    require basePath('views/' . $name . '.view.php');
+    $viewPath = basePath('views/' . $name . '.view.php');
+
+    if(file_exists($viewPath))
+    {
+        require $viewPath;
+    }
+    else
+    {
+        echo "View '{$name}' doesn't exist.";
+    }
 }
 
 /**
@@ -34,12 +43,49 @@ function loadView($name)
  * @param string name
  * @return void
  * 
- * File extensions, even when just holding html, will be .php.
- * Thus it is possible to get the file by just passing the name.
+ * File extensions in our app, even when just holding html, will be .php.
+ * Get the file by just passing the name.
  * Ie. $name = 'footer' instead of $name = 'footer.php'
  */
 
 function loadPartial($name)
 {
-    require basePath('views/partials/' . $name . '.php');
+    $partialPath = basePath('views/partials/' . $name . '.php');
+
+    if(file_exists($partialPath))
+    {
+        require $partialPath;
+    }
+    else
+    {
+        echo "View '{$name}' doesn't exist.";
+    }
 }
+
+/**
+ * Inspect the value(s) of a variable. Useful for debugging.
+ * 
+ * @param mixed value
+ * @return void
+ */
+
+ function inspect($value)
+ {
+    echo '<pre>';
+    var_dump($value);
+    echo '</pre>';
+ }
+
+/**
+ * Inspect the value(s) of a variable dies.
+ * 
+ * @param mixed value
+ * @return void
+ */
+
+ function inspectAndDie($value)
+ {
+    echo '<pre>';
+    die(var_dump($value));
+    echo '</pre>';
+ }
