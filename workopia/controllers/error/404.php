@@ -1,3 +1,3 @@
 <?php
 
-echo "Resource not found!";
+loadView("error/404");
