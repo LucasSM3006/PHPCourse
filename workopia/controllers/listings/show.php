@@ -12,4 +12,4 @@ $params =
 
 $listing = $db->query('SELECT * FROM listings WHERE id = :id', $params)->fetch();
 
-loadView('listings/show');
+loadView('listings/show', ['listing' => $listing]);
