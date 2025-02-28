@@ -14,21 +14,28 @@ function basePath($path = '')
 }
 
 /**
- * Loads a view by using a require.
+ * Loads a view by using a require. Has an extra paramater to pass data to the views.
  * 
  * @param string name
+ * @param array data (optional)
  * @return void
  * 
  * Suffix of views is .view.php therefore it is done in a way where
  * you can simply pass the name of the resource. Ie. $name = 'search' instead of $name = 'search.view.php'
+ * 
+ * Uses 'extract' to pass data to views. Creates variables out of keys in arrays.
+ * Example of how to use it is in 'home.php' in the controllers.
+ * Takes the key of an array and makes it into a varaible. Aka, ['listings' => $listings].
+ * 'listings' could be 'l' and that's how we access it in the view.
  */
 
-function loadView($name)
+function loadView($name, $data = [])
 {
     $viewPath = basePath('views/' . $name . '.view.php');
 
     if(file_exists($viewPath))
     {
+        extract($data); // gives access to data.
         require $viewPath;
     }
     else
@@ -89,3 +96,14 @@ function loadPartial($name)
     die(var_dump($value));
     echo '</pre>';
  }
+
+/**
+ * Format salary
+ * 
+ * @param string salary
+ * @return string formattedSalary
+ */
+function formatSalary($salary)
+{
+    return '$' . number_format(floatval($salary));
+}
