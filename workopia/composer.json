@@ -1,0 +1,19 @@
+{
+    "name": "lucassm3006/phpcourse",
+    "description": "Job listing app, made following a course",
+    "authors" : 
+    [
+        {
+            "name": "Lucas",
+            "email": "placeholder@email.com"
+        }
+    ],
+    "autoload":
+    {
+        "psr-4":
+        {
+            "Framework\\": "Framework/",
+            "App\\": "App/"
+        }
+    }
+}
