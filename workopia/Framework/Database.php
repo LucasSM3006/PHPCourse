@@ -1,5 +1,11 @@
 <?php
 
+namespace Framework;
+
+use PDO;
+use Exception;
+use PDOException;
+
 class Database 
 {
     public $conn;
@@ -58,9 +64,9 @@ class Database
             $sth->execute();
             return $sth;
         }
-        catch (PDOException $e)
+        catch (\PDOException $e)
         {
-            throw new Exception("Query failed to execute: " . $e->getMessage());
+            throw new \Exception("Query failed to execute: " . $e->getMessage());
         }
     }
 }
