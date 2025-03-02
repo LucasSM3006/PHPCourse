@@ -10,19 +10,28 @@ class Router
      * Registers a route based on $method param.
      * @param string method
      * @param string uri
-     * @param string controller
+     * @param string action
      * 
      * method is the http method (GET, POST, PUT, DELETE), uri is the location, controller is the controller
      * 
      */
 
-    public function registerRoute($method, $uri, $controller)
+    public function registerRoute($method, $uri, $action)
     {
+        // Will take the values and put them into these two variables.
+        // For example, In routes.php, we send 'HomeController@index'.
+        // List will split and put HomeController on $controller and then index on $controllerMethod.
+        list($controller, $controllerMethod) = explode('@', $action);
+
+        inspect($controller);
+        inspect($controllerMethod);
+
         $this->routes[] =
         [
             'method' => $method,
             'uri' => $uri,
-            'controller' => $controller
+            'controller' => $controller,
+            'controllerMethod' => $controllerMethod
         ];
     }
 
@@ -117,7 +126,14 @@ class Router
         {
             if($route['uri'] === $uri && $route['method'] === $method)
             {
-                require basePath('App/' . $route['controller']);
+                // Extract controller and controller method
+                $controller = 'App\\Controllers\\' . $route['controller'];
+                $controllerMethod = $route['controllerMethod'];
+
+                // Instantiating the controller class & calling the method
+                $controllerInstance = new $controller();
+                $controllerInstance->$controllerMethod();
+
                 return;
             }
         }
