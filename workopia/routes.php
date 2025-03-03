@@ -7,3 +7,4 @@
 
 // The idea is that we pass the place and then the function.
 $router->get('/', 'HomeController@index');
+$router->get('/listings', 'ListingController@index');
