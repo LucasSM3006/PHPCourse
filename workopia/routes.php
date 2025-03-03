@@ -8,3 +8,5 @@
 // The idea is that we pass the place and then the function.
 $router->get('/', 'HomeController@index');
 $router->get('/listings', 'ListingController@index');
+$router->get('/listings/create', 'ListingController@create');
+$router->get('/listing', 'ListingController@listing');
