@@ -105,21 +105,65 @@ class Router
     * the uri for this one will be the one in $_SERVER['REQUEST_URI']
     */
 
-    public function route($uri, $method)
+    public function route($uri)
     {
+        $requestMethod = $_SERVER['REQUEST_METHOD'];
+
         foreach($this->routes as $route)
         {
-            if($route['uri'] === $uri && $route['method'] === $method)
+            // Splits the URI into segments.
+            // The trim is necessary otherwise we get an empty value at the start of the array.
+            // A regular trim didn't work.
+            $uriSegments = explode("/", trim($uri, '/'));
+            
+            // Split the route URI into segments. From the routes themselves.
+            $routeSegments = explode("/", trim($route['uri'], '/'));
+
+            $match = true;
+
+            // Check if n of segments match
+            if( count($uriSegments) === count($routeSegments) &&
+                strtoupper($route['method']) === $requestMethod)
             {
-                // Extract controller and controller method
-                $controller = 'App\\Controllers\\' . $route['controller'];
-                $controllerMethod = $route['controllerMethod'];
+                $params = [];
 
-                // Instantiating the controller class & calling the method
-                $controllerInstance = new $controller();
-                $controllerInstance->$controllerMethod();
+                $match = true;
 
-                return;
+                // for loop to check if segments match
+                for($i = 0; $i < count($uriSegments); $i++)
+                {
+                    // regex to find parameters. we're using {}.
+                    // if the uri's do not match and there is no param
+                    if($routeSegments[$i] !== $uriSegments[$i] && !preg_match('/\{(.+?)\}/', $routeSegments[$i]))
+                    {
+                        $match = false;
+                        break;
+                    }
+
+                    // $matches will work like the "out" from C#. $matches will hold whatever value it gets sent.
+                    // ex. {id}. $matches becomes an array with "{id}" and "id" on it.
+                    // can get the actual values w/ $matches[1] for example.
+
+                    // check for the param and add to the $params array
+                    if(preg_match('/\{(.+?)\}/', $routeSegments[$i], $matches))
+                    {
+                        // Setting the key as the "id" and then the value being passed in the uri.
+                        $params[$matches[1]] = $uriSegments[$i];
+                    }
+                }
+
+                if($match)
+                {
+                    $controller = 'App\\Controllers\\' . $route['controller'];
+                    $controllerMethod = $route['controllerMethod'];
+
+                    // Instantiating the controller class & calling the method
+                    $controllerInstance = new $controller();
+                    // Passing params to the method in case it needs it.
+                    $controllerInstance->$controllerMethod($params);
+
+                    return;
+                }
             }
         }
 
