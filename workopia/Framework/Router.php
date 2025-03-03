@@ -23,9 +23,6 @@ class Router
         // List will split and put HomeController on $controller and then index on $controllerMethod.
         list($controller, $controllerMethod) = explode('@', $action);
 
-        inspect($controller);
-        inspect($controllerMethod);
-
         $this->routes[] =
         [
             'method' => $method,
