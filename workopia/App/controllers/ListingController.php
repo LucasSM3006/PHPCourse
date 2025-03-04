@@ -80,8 +80,7 @@ class ListingController
             'title',
             'description',
             'salary',
-            'requirements',
-            'benefits',
+            'tags',
             'company',
             'address',
             'city',
@@ -92,8 +91,18 @@ class ListingController
             'benefits'
         ];
 
-        $newListingData = array_intersect_key($_POST, $allowedFields);
+        // Creates a new array if both keys are in the arrays.
+        // Array flip will reverse and turn the values into the keys and keys into values.
+        // Basically, allowedfields is a normal array without keys. What we are doing is turning the values into keys.
+        $newListingData = array_intersect_key($_POST, array_flip($allowedFields));
 
+        // Will eventually use $_SESSION[];
+        $newListingData['user_id'] = 1;
+
+        // will run the 'sanitize' function we have in the helpers.php file. On every piece of the listing data.
+        $newListingData = array_map('sanitize', $newListingData);
+
+        inspect($newListingData);
         inspectAndDie($_POST);
     }
 }
