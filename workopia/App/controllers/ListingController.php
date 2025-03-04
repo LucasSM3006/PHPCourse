@@ -66,4 +66,34 @@ class ListingController
         
         loadView('listings/show', ['listing' => $listing]);
     }
+
+    /**
+     * Stores data in the database
+     * 
+     * @return void
+     */
+
+    public function store()
+    {
+        $allowedFields = 
+        [
+            'title',
+            'description',
+            'salary',
+            'requirements',
+            'benefits',
+            'company',
+            'address',
+            'city',
+            'state',
+            'phone',
+            'email',
+            'requirements',
+            'benefits'
+        ];
+
+        $newListingData = array_intersect_key($_POST, $allowedFields);
+
+        inspectAndDie($_POST);
+    }
 }
