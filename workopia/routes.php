@@ -9,6 +9,8 @@
 $router->get('/', 'HomeController@index');
 $router->get('/listings', 'ListingController@index');
 $router->get('/listings/create', 'ListingController@create');
-$router->get('/listing/{id}', 'ListingController@listing');
+$router->get('/listings/{id}', 'ListingController@listing');
 
 $router->post('/listings', 'ListingController@store');
+
+$router->delete('/listings/{id}', 'ListingController@destroy');
