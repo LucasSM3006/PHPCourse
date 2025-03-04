@@ -3,6 +3,7 @@
 namespace App\Controllers;
 
 use Framework\Database;
+use Framework\Validation;
 
 class ListingController
 {
@@ -99,10 +100,33 @@ class ListingController
         // Will eventually use $_SESSION[];
         $newListingData['user_id'] = 1;
 
-        // will run the 'sanitize' function we have in the helpers.php file. On every piece of the listing data.
+        // will run the 'sanitize' function we have in the helpers.php file. On every piece of the listing data.    
         $newListingData = array_map('sanitize', $newListingData);
 
-        inspect($newListingData);
-        inspectAndDie($_POST);
+        $requiredFields = ['title', 'description', 'email', 'city', 'state'];
+
+        $errors = [];
+
+        foreach($requiredFields as $field)
+        {
+            if(empty($newListingData[$field]) || !Validation::string($newListingData[$field]))
+            {
+                $errors[$field] = ucfirst($field) . " is required";
+            }
+        }
+
+        if(!empty($errors))
+        {
+            // Reload the view w/ errors!
+            loadView("listings/create", [
+                'errors' => $errors,
+                'listing' => $newListingData
+            ]);
+        }
+        else
+        {
+            // Submit data
+            echo 'Success';
+        }
     }
 }
