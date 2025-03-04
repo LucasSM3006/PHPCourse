@@ -44,6 +44,7 @@ class ListingController
 
     /**
      * Listing. Shows a singular listing based on the ID.
+     * @param array params
      * @return void
      */
 
@@ -156,5 +157,31 @@ class ListingController
             
             redirect('/listings');
         }
+    }
+
+    
+
+    public function destroy($params)
+    {
+        $id = $params['id'];
+
+        $queryParams =
+        [
+            'id' => $id
+        ];
+
+        $listing = $this->db->query("SELECT * FROM listings WHERE id = :id", $queryParams)->fetch();
+
+        // If listings doesn't exist.
+        if(!$listing)
+        {
+            ErrorController::notFound("Listing not found");
+            return;
+        }
+
+        // If it does exist.
+        $this->db->query("DELETE FROM listings WHERE id = :id", $queryParams);
+
+        redirect('/listings');
     }
 }
