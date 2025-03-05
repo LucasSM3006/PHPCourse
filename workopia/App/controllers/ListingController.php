@@ -159,7 +159,11 @@ class ListingController
         }
     }
 
-    
+    /**
+     * Delete data in DB
+     * @param array params
+     * @return void
+     */
 
     public function destroy($params)
     {
@@ -188,5 +192,59 @@ class ListingController
         $_SESSION['success_message'] = "Listing deleted successfully!";
 
         redirect('/listings');
+    }
+
+    /**
+     * Show the list edit form
+     * 
+     * @param array params
+     * @return void
+     */
+
+    public function edit($params)
+    {
+        $id = $params['id'] ?? '';
+
+        $queryParams =
+        [
+            'id' => $id
+        ];
+        
+        $listing = $this->db->query('SELECT * FROM listings WHERE id = :id', $queryParams)->fetch();
+
+        // Check if listing exists
+        if(!$listing)
+        {
+            ErrorController::notFound("Listing not found");
+            return;
+        }
+        
+        loadView('listings/edit', ['listing' => $listing]);
+    }
+
+    /**
+     * Update a listing
+     * @param array params
+     * @return void
+     */
+    public function update($params)
+    {
+        $id = $params['id'] ?? '';
+
+        $queryParams =
+        [
+            'id' => $id
+        ];
+        
+        $listing = $this->db->query('SELECT * FROM listings WHERE id = :id', $queryParams)->fetch();
+
+        // Check if listing exists
+        if(!$listing)
+        {
+            ErrorController::notFound("Listing not found");
+            return;
+        }
+        
+        inspectAndDie($params);
     }
 }
