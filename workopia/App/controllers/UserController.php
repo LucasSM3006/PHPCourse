@@ -101,7 +101,7 @@ class UserController
         
         $query = "SELECT * FROM users WHERE email = :email";
 
-        $listing = $this->db->query($query, $params);
+        $listing = $this->db->query($query, $params)->fetch();
 
         if($listing)
         {
@@ -109,5 +109,21 @@ class UserController
             loadView('users/create', ['errors' => $errors]);
             exit;
         }
+
+        // User Creation
+        $userQueryParams =
+        [
+            'name' => $userData['name'],
+            'email' => $userData['email'],
+            'city' => $userData['city'],
+            'state' => $userData['state'],
+            'password' => password_hash($userData['password'], PASSWORD_DEFAULT)
+        ];
+        
+        $query = "INSERT INTO users (name, email, city, state, password) VALUES (:name, :email, :city, :state, :password)";
+
+        $this->db->query($query, $userQueryParams);
+
+        redirect('/');
     }
 }
