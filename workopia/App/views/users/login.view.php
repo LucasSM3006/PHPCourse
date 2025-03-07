@@ -11,13 +11,15 @@ loadPartial('navbar');
         <div class="message bg-green-100 p-3 my-3">
           This is a success message.
         </div> -->
-        <form>
+        <form method="POST" action='/auth/login'>
+        <?php loadPartial('errors', ['errors' => $errors ?? []]); ?>
           <div class="mb-4">
             <input
               type="email"
               name="email"
               placeholder="Email Address"
               class="w-full px-4 py-2 border rounded focus:outline-none"
+              value="<?= $user['email'] ?? '' ?>"
             />
           </div>
           <div class="mb-4">
