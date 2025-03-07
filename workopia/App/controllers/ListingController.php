@@ -4,6 +4,8 @@ namespace App\Controllers;
 
 use Framework\Database;
 use Framework\Validation;
+use Framework\Session;
+use Framework\Authorization;
 
 class ListingController
 {
@@ -25,7 +27,7 @@ class ListingController
 
     public function index()
     {
-        $listings = $this->db->query('SELECT * FROM listings')->fetchAll();
+        $listings = $this->db->query('SELECT * FROM listings ORDER BY created_at DESC')->fetchAll();
 
         loadView('listings/index', [
             'listings' => $listings
@@ -98,8 +100,8 @@ class ListingController
         // Basically, allowedfields is a normal array without keys. What we are doing is turning the values into keys.
         $newListingData = array_intersect_key($_POST, array_flip($allowedFields));
 
-        // Will eventually use $_SESSION[];
-        $newListingData['user_id'] = 1;
+        // Gets the id of the logged in user.
+        $newListingData['user_id'] = Session::get('user')['id'];
 
         // will run the 'sanitize' function we have in the helpers.php file. On every piece of the listing data.    
         $newListingData = array_map('sanitize', $newListingData);
@@ -183,9 +185,15 @@ class ListingController
             return;
         }
 
+        // CHECK IF THE USER TRYING TO DELETE MATCHES W/ THE OWNER ON THE DB.
+        if(!Authorization::isOwner($listing->user_id))
+        {
+            $_SESSION['error_message'] = 'You are not authorized to delete this listing';
+            return redirect('/listings/' . $listing->id);
+        }
+
         // If it does exist.
         $this->db->query("DELETE FROM listings WHERE id = :id", $queryParams);
-
 
         // Set flash message (aka giving the user messages)
 
