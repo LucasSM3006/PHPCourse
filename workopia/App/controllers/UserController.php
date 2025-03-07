@@ -152,4 +152,79 @@ class UserController
 
         redirect('/');
     }
+
+    /**
+     * Authenticate/login the user w/ email and password. Creates a session.
+     * 
+     * @return void
+     */
+    public function authenticate()
+    {
+        $email = $_POST['email'];
+        $password = $_POST['password'];
+
+        $userData =
+        [
+            'email' => $email
+        ];
+
+        $errors = [];
+
+        // Validation
+
+        if(!Validation::email($email))
+        {
+            $errors['email'] = 'Email is incorrect. Epected format: "user@email.com"';
+        }
+        
+        if(!Validation::string($password))
+        {
+            $errors['password'] = 'Password is incorrect. Must be at least 6 characters."';
+        }
+
+        if(!empty($errors))
+        {
+            loadView('users/login', [
+                'errors' => $errors,
+                'user' => $userData
+            ]);
+            exit;
+        }
+
+        $query = "SELECT * FROM users WHERE email = :email";
+
+        $userListing = $this->db->query($query, $userData)->fetch();
+
+        if(!$userListing)
+        {
+            $errors['email'] = "Incorrect Credentials";
+            loadView('users/login', [
+                'errors' => $errors,
+                'user' => $userData
+            ]);
+            exit;
+        }
+
+        // Check for password match
+        if(!password_verify($password, $userListing->password))
+        {
+            $errors['email'] = "Incorrect Credentials";
+            loadView('users/login', [
+                'errors' => $errors,
+                'user' => $userData
+            ]);
+        }
+
+        $query = "SELECT * FROM users WHERE email = :email AND password = :password";
+
+        Session::set('user', [
+            'id' => $userListing->id,
+            'name' => $userListing->name,
+            'email' => $userListing->email,
+            'city' => $userListing->city,
+            'state' => $userListing->state
+        ]);
+
+        redirect('/');
+    }
 }
