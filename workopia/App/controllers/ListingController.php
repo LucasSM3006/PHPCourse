@@ -335,4 +335,27 @@ class ListingController
             redirect('/listings/' . $id);
         }
     }
+
+    /**
+     * Search for specific posts by keywords/locations
+     * 
+     * @return void
+     */
+    public function search()
+    {
+        $keywords = isset($_GET['keywords']) ? $_GET['keywords'] : null;
+        $location = isset($_GET['location']) ? $_GET['location'] : null;
+
+        $query = "SELECT * FROM listings WHERE title LIKE :title";
+
+        $params = [
+            'title' => "%{$keywords}%"
+        ];
+
+        $listings = $this->db->query($query, $params)->fetchAll();
+
+        loadView('/listings', [
+            'listings' => $listings
+        ]);
+    }
 }
