@@ -228,6 +228,13 @@ class ListingController
             ErrorController::notFound("Listing not found");
             return;
         }
+
+        // CHECK IF THE USER TRYING TO EDIT MATCHES W/ THE OWNER ON THE DB.
+        if(!Authorization::isOwner($listing->user_id))
+        {
+            Session::setFlashMessage('error_message', 'You are not authorized to edit this listing');
+            return redirect('/listings/' . $listing->id);
+        }
         
         loadView('listings/edit', ['listing' => $listing]);
     }
@@ -269,6 +276,13 @@ class ListingController
         {
             ErrorController::notFound("Listing not found");
             return;
+        }
+
+        // CHECK IF THE USER TRYING TO EDIT MATCHES W/ THE OWNER ON THE DB.
+        if(!Authorization::isOwner($listing->user_id))
+        {
+            Session::setFlashMessage('error_message', 'You are not authorized to edit this listing');
+            return redirect('/listings/' . $listing->id);
         }
         
         $updateValues = [];
