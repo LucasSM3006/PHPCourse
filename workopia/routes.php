@@ -10,6 +10,8 @@ $router->get('/', 'HomeController@index');
 $router->get('/listings', 'ListingController@index');
 $router->get('/listings/create', 'ListingController@create', ['auth']);
 $router->get('/listings/edit/{id}', 'ListingController@edit', ['auth']);
+// Search needs to be here due to the way we route. If listings/id is above it, it assumes that keyword & location params are the id.
+$router->get('/listings/search', 'ListingController@search');
 $router->get('/listings/{id}', 'ListingController@listing');
 
 $router->post('/listings', 'ListingController@store', ['auth']);
